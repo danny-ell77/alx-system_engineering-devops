@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # This script is pinging 5 times the given as parameter ip adress.
 
+
 if [ $# -eq 0 ]; then
-	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
-else
-    for i in {1..5}
-    do
-	    ping -c 1 "$1"
-    done
+  echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+  exit 1
 fi
+
+ip="$1"
+
+for ((i=1; i<=5; i++)); do
+  ping -c 1 "$ip" 
+done
