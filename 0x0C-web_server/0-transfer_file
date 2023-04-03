@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 # transfer files using scp
 # Accepts four arguments:
 #+    The path to the file to be transferred.
