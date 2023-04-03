@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# This script install the nginx web-server on our server
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo mkdir -p /var/www/html
+chmod -R 755 /var/www
+echo "Hello World!" > /var/www/example.com/html/index.html
+echo "server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+}" > /etc/nginx/sites-enabled/default
+
+if  pgrep nginx > /dev/null ; then
+    sudo service nginx restart
+else
+    sudo service nginx start
+if
