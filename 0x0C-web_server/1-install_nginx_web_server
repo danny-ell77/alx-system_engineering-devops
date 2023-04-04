@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
-# This script install the nginx web-server on our server
+# A script that installs nginx server on an ubuntu linux distro.
+# The installed server listens to port 80 (HTTP) for connection
+# And serves a default page index.html on the HTTP  GET request.
 
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo mkdir -p /var/www/html
-chmod -R 755 /var/www
-echo "Hello World!" > /var/www/example.com/html/index.html
-echo "server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-	index index.html index.htm index.nginx-debian.html;
-	server_name _;
-	location / {
-		try_files \$uri \$uri/ =404;
-	}
-}" > /etc/nginx/sites-enabled/default
+sudo apt-get update -y
 
-if  pgrep nginx > /dev/null ; then
-    sudo service nginx restart
-else
-    sudo service nginx start
-if
+sudo apt-get install nginx -y
+
+echo 'Hello World!' > /var/www/html/index.html
+
+service nginx restart
